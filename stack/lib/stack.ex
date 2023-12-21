@@ -31,7 +31,7 @@ defmodule Stack do
 
 
 
-##################################################
+#########  SERVER  #########################################
   @impl true
   @spec init(list()) :: {:ok, list()}
   def init(state\\[]) do
