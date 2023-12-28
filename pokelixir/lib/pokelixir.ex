@@ -17,9 +17,18 @@ defmodule Pokelixir do
 
   """
 
-  def get(name) do
+  def getPokemon(name) do
     Finch.start_link(name: SinglePokeFinch)
     req = Finch.build(:get, "https://pokeapi.co/api/v2/pokemon/#{String.downcase(name)}")
-    Finch.request!(req, SinglePokeFinch)
+    res = Finch.request!(req, SinglePokeFinch)
+    if res.status == 200 do
+      Jason.decode!(res.body)
+    else
+      "#{res.status} #{res.body}"
+    end
   end
+
+
+
+
 end
