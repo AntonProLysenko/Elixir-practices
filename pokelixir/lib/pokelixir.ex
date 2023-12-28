@@ -17,10 +17,9 @@ defmodule Pokelixir do
 
   """
 
-  def get(this, name) do
-    children = [
-  {Finch, name: MyFinch}
-]
-    Finch.start_link(name: MyFinch)
+  def get(name) do
+    Finch.start_link(name: SinglePokeFinch)
+    req = Finch.build(:get, "https://pokeapi.co/api/v2/pokemon/#{String.downcase(name)}")
+    Finch.request!(req, SinglePokeFinch)
   end
 end
