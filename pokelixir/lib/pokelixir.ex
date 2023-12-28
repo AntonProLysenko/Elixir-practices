@@ -29,16 +29,40 @@ defmodule Pokelixir do
         "#{res.status} #{res.body}"
       end
     end)
+  end
+
+  def getMultiplePokemons()do
+    Task.async(fn ->
+      Finch.start_link(name: MultiplePokeFinch)
+      req = Finch.build(:get, "https://pokeapi.co/api/v2/pokemon/")
+      res = Finch.request!(req, MultiplePokeFinch)
+
+      if res.status == 200 do
+        decoded = Jason.decode!(res.body)
+        decoded["results"]
+      else
+        "#{res.status} #{res.body}"
+      end
+
+    end)
+  end
+
+  def choseAnyFromAvailable() do
+    # fetched_pokemons =
+     IO.puts("Here all available Pokemons to choise:\n")
+    names = Enum.map(Task.await(getMultiplePokemons()), fn pokemon->
+      IO.puts("#{pokemon["name"]}")
+    end)
+
+    #{names}")
 
   end
 
-
   def createPokemon(name) do
     fetched_pokemon = Task.await(getPokemon(name))
-    types =
 
     IO.inspect(fetched_pokemon)
-    pokemon = %Pokelixir{
+    %Pokelixir{
       id: fetched_pokemon["id"],
       name: fetched_pokemon["name"],
       # hp: fetched_pokemon.stats[0],
