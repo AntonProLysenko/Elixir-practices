@@ -46,16 +46,28 @@ defmodule Pokelixir do
 
     end)
   end
-
+defp getConform(player_input) do
+      String.trim(IO.gets(
+        "Are you shure you want to coise #{String.downcase(player_input)} Y/N: "
+      ))
+    end
   def choseAnyFromAvailable() do
     # fetched_pokemons =
-     IO.puts("Here all available Pokemons to choise:\n")
-    names = Enum.map(Task.await(getMultiplePokemons()), fn pokemon->
-      IO.puts("#{pokemon["name"]}")
-    end)
+    player_input =
+      String.trim(IO.gets(
+        "Here all available Pokemons to choise:\n
+        #{Enum.map(Task.await(getMultiplePokemons()), fn pokemon->
+          "#{pokemon["name"]}\n"
+        end)}
+      "))
 
-    #{names}")
+     player_conform = getConform(player_input)
+    cond do
+      player_conform == "Y"-> createPokemon(player_input);
+      player_conform == "N"-> choseAnyFromAvailable();
+      true -> IO.puts("Please Enter Y or N");getConform(player_input)
 
+    end
   end
 
   def createPokemon(name) do
