@@ -1,0 +1,28 @@
+<h1 class="text-4xl">Count  The current count is : <%= @count %></h1>
+
+<.link
+    navigate={~p"/?count=#{@count + 1}"}
+    class="bg-cyan-500 hover:bg-cyan-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Increase
+</.link>
+
+<.link
+    navigate={~p"/?count=#{@count - @count}"}
+    class="bg-grey-500 hover:bg-grey-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Clear
+</.link>
+
+<.link
+    navigate={~p"/?count=#{@count - 1}"}
+    class="bg-purple-500 hover:bg-grey-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Decrease
+</.link>
+
+<.form :let={f} for={%{}} action={~p"/"}>
+  <.input type="number" field={f[:increment_by]} value={1} />
+  <.input type="hidden" field={f[:count]} value={@count} />
+  <.button class="mt-2">Increment</.button>
+</.form>
