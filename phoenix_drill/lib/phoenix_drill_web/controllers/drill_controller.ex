@@ -24,12 +24,22 @@ defmodule PhoenixDrillWeb.NavBarController do
     render(conn, :home, layout: false)
   end
 
-    def about(conn, _params)do
+  def about(conn, _params)do
     render(conn, :about,  layout: false)
   end
 
-    def projects(conn, _params)do
-
+  def projects(conn, _params)do
     render(conn, :projects,  layout: false)
   end
+
+end
+
+
+
+defmodule PhoenixDrillWeb.CounterController do
+  use PhoenixDrillWeb, :controller
+  def count(conn, params)do
+       render(conn, :counter, counter: if(params["counter"], do: params["counter"], else: 0), layout: false)
+  end
+
 end

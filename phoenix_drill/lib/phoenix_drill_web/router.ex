@@ -18,12 +18,13 @@ defmodule PhoenixDrillWeb.Router do
     pipe_through :browser
 
     get "/", HelloController, :hello
-
+    get "/counter", CounterController, :count
     get "/random_number", RandomNumController, :random_number
 
     get "/home", NavBarController, :home
     get "/about", NavBarController, :about
     get "/projects", NavBarController, :projects
+
   end
 
   # Other scopes may use custom stacks.
