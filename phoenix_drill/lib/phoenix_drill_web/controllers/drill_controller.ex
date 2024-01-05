@@ -39,7 +39,8 @@ end
 defmodule PhoenixDrillWeb.CounterController do
   use PhoenixDrillWeb, :controller
   def count(conn, params)do
-       render(conn, :counter, counter: if(params["counter"], do: params["counter"], else: 0), layout: false)
+    IO.inspect(params, label: "HERE!!!!")
+       render(conn, :counter, counter: if(params["counter"], do: String.to_integer(params["counter"]), else: 0), layout: false)
   end
 
 end

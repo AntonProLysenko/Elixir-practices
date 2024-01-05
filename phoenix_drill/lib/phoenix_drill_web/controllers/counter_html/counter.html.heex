@@ -1,1 +1,23 @@
-<h1>Counter</h1>
+<h1 class="text-4xl">Count  The current count is : <%= @counter %></h1>
+
+<.link
+    navigate={~p"/counter?counter=#{@counter + 1}"}
+    class="bg-cyan-500 hover:bg-cyan-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Increase
+</.link>
+
+
+<.link
+    navigate={~p"/counter?counter=#{@counter - 1}"}
+    class="bg-cyan-500 hover:bg-cyan-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Decrease
+</.link>
+
+<.link
+    navigate={~p"/counter?counter=#{@counter - @counter}"}
+    class="bg-cyan-500 hover:bg-cyan-400 text-2xl p-4 mt-4 rounded-full inline-block"
+>
+    Clear
+</.link>
